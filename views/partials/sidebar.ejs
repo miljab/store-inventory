@@ -3,12 +3,11 @@
     <ul>
       <li>All Games</li>
       <li>Categories</li>
-      <ul>
-        <% categories.map((category) => { %>
+      <ul class="categories">
+        <% categoriesList.forEach((category) => { %>
         <li><%= category %></li>
         <% }) %>
       </ul>
     </ul>
   </div>
-  <div class="menage-categories">Menage Categories</div>
 </aside>
