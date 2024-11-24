@@ -26,9 +26,36 @@ async function gamesGet(req, res) {
   });
 }
 
-function categoryGamesGet(req, res) {}
+async function gamesInCategoryGet(req, res) {
+  const id = req.params.id;
+  const rows = await db.getGamesInCategory(id);
+  const gamesMap = new Map();
+
+  rows.forEach((row) => {
+    if (!gamesMap.has(row.id)) {
+      gamesMap.set(row.id, {
+        name: row.name,
+        price: row.price,
+        stock: row.stock,
+        description: row.description,
+        image_url: row.image_url,
+        categories: [],
+      });
+    }
+
+    if (row.category_name)
+      gamesMap.get(row.id).categories.push(row.category_name);
+  });
+
+  console.log(gamesMap);
+
+  res.render("gamesList", {
+    categoriesList: req.categories,
+    gamesList: gamesMap,
+  });
+}
 
 module.exports = {
   gamesGet,
-  categoryGamesGet,
+  gamesInCategoryGet,
 };
