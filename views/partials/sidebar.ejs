@@ -1,11 +1,12 @@
 <aside>
   <div class="nav">
     <ul>
-      <li>All Games</li>
-      <li>Categories</li>
+      <a href="/"><li>All Games</li></a>
+      <!-- href to change -->
+      <a href="/"><li>Categories</li></a>
       <ul class="categories">
         <% categoriesList.forEach((category) => { %>
-        <li><%= category.name %></li>
+        <a href="/category/<%= category.id %>"><li><%= category.name %></li></a>
         <% }) %>
       </ul>
     </ul>

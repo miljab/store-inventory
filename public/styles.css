@@ -56,7 +56,7 @@ aside {
   list-style: none;
 }
 
-.nav > ul > li {
+.nav > ul > a li {
   margin-top: 20px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -150,4 +150,9 @@ main {
 .game-title-div {
   display: flex;
   align-items: center;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
 }
