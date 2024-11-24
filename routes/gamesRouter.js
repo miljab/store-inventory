@@ -4,5 +4,6 @@ const gamesController = require("../controllers/gamesController");
 
 gamesRouter.get("/", gamesController.gamesGet);
 gamesRouter.get("/category/:id", gamesController.gamesInCategoryGet);
+gamesRouter.get("/game/:id", gamesController.gameInfoGet);
 
 module.exports = gamesRouter;

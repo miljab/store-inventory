@@ -4,6 +4,7 @@ function createGamesWithCategoriesMap(rows) {
   rows.forEach((row) => {
     if (!gamesMap.has(row.id)) {
       gamesMap.set(row.id, {
+        id: row.id,
         name: row.name,
         price: row.price,
         stock: row.stock,

@@ -1,17 +1,19 @@
 <div class="games-list">
   <% gamesList.forEach((game) => { %>
-  <div class="game-card">
-    <div class="game-cover-div">
-      <img src="<%= game.image_url %>" alt="<%= game.name %>" />
+  <a href="/game/<%= game.id %>">
+    <div class="game-card">
+      <div class="game-cover-div">
+        <img src="<%= game.image_url %>" alt="<%= game.name %>" />
+      </div>
+      <div class="game-title-div">
+        <h3><%= game.name %></h3>
+      </div>
+      <div class="game-categories">
+        <% game.categories.forEach((category) => { %>
+        <span class="game-category"><%= category %></span>
+        <% }) %>
+      </div>
     </div>
-    <div class="game-title-div">
-      <h3><%= game.name %></h3>
-    </div>
-    <div class="game-categories">
-      <% game.categories.forEach((category) => { %>
-      <span class="game-category"><%= category %></span>
-      <% }) %>
-    </div>
-  </div>
+  </a>
   <% }) %>
 </div>

@@ -22,9 +22,19 @@ async function gamesInCategoryGet(req, res) {
   });
 }
 
-async function gameInfoGet(req, res) {}
+async function gameInfoGet(req, res) {
+  const id = req.params.id;
+  const rows = await db.getGameWithCategories(id);
+  const game = gamesMap.createGamesWithCategoriesMap(rows);
+
+  res.render("gameDetails", {
+    categoriesList: req.categories,
+    game: game.get(parseInt(id)),
+  });
+}
 
 module.exports = {
   gamesGet,
   gamesInCategoryGet,
+  gameInfoGet,
 };

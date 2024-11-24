@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title><%= game.name %></title>
+  </head>
+  <body>
+    <div class="content">
+      <header>
+        <h1>Store Inventory</h1>
+      </header>
+      <%- include("./partials/sidebar.ejs") %>
+      <main>
+        <div class="game-info">
+          <div class="game-info-cover">
+            <img src="<%= game.image_url %>" alt="<%= game.name %>" />
+          </div>
+          <div class="game-info-title">
+            <h2><%= game.name %></h2>
+          </div>
+          <div class="game-info-price">
+            <span>$<%= game.price %></span>
+          </div>
+          <div class="game-info-stock">
+            <span>Stock: <%= game.stock %></span>
+          </div>
+          <div class="game-info-categories">
+            <% game.categories.forEach((category) => { %>
+            <span><%= category %></span>
+            <% }) %>
+          </div>
+          <div class="game-info-description">
+            <p><%= game.description %></p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
