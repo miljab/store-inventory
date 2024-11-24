@@ -47,8 +47,6 @@ async function gamesInCategoryGet(req, res) {
       gamesMap.get(row.id).categories.push(row.category_name);
   });
 
-  console.log(gamesMap);
-
   res.render("gamesList", {
     categoriesList: req.categories,
     gamesList: gamesMap,
