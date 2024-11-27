@@ -156,3 +156,103 @@ a {
   text-decoration: inherit;
   color: inherit;
 }
+
+.game-info-cover img {
+  width: 300px;
+}
+
+.game-info {
+  display: grid;
+  grid-template-columns: 500px 250px 250px;
+  grid-template-rows: 150px 50px auto auto;
+  margin: auto;
+  background-color: rgb(41, 41, 41);
+  width: 1080px;
+  padding: 20px;
+  border-radius: 12px;
+  gap: 20px;
+  position: relative;
+}
+
+.game-info-cover {
+  display: flex;
+  justify-content: center;
+  grid-column: 1/2;
+  grid-row: 1/4;
+}
+
+.game-info-title {
+  grid-column: 2/4;
+  grid-row: 1/2;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.game-info-price {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  font-size: 1.5rem;
+  background-color: rgb(27, 27, 27);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-info-stock {
+  grid-column: 3/4;
+  grid-row: 2/3;
+  font-size: 1.5rem;
+  background-color: rgb(27, 27, 27);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-info-categories {
+  grid-column: 2/4;
+  grid-row: 3/4;
+  font-size: 1.2rem;
+  background-color: rgb(27, 27, 27);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.game-info-description {
+  grid-column: 1/4;
+  grid-row: 4/5;
+  background-color: rgb(27, 27, 27);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.game-info-categories span {
+  background-color: rgb(138, 138, 138);
+  padding: 3px 5px;
+  border-radius: 8px;
+}
+
+.game-info-categories span:hover {
+  cursor: pointer;
+}
+
+.edit-game {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  font-size: 2rem;
+}
+
+.edit-game:hover {
+  cursor: pointer;
+}
+
+.game-card.last {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  font-weight: 300;
+}
