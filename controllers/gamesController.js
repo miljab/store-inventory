@@ -33,8 +33,13 @@ async function gameInfoGet(req, res) {
   });
 }
 
+function newGameGet(req, res) {
+  res.render("newGame", { categoriesList: req.categories });
+}
+
 module.exports = {
   gamesGet,
   gamesInCategoryGet,
   gameInfoGet,
+  newGameGet,
 };

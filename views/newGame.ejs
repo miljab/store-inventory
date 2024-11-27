@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>New game</title>
+  </head>
+  <body>
+    <div class="content">
+      <header>
+        <h1>Store Inventory</h1>
+      </header>
+      <%- include("./partials/sidebar.ejs") %>
+      <main>
+        <div class="content">
+          <form action="/game/new" method="POST">
+            <label for="gameName">Game title:</label>
+            <input type="text" name="gameName" id="gameName" />
+            <label for="gamePrice">Price:</label>
+            <input type="text" name="gamePrice" id="gamePrice" />
+            <label for="gameStock">Stock:</label>
+            <input type="text" name="gameStock" id="gameStock" />
+            <label for="gameImg">Image URL:</label>
+            <input type="text" name="gameImg" id="gameImg" />
+            <label for="gameDescription">Description:</label>
+            <textarea name="gameDescription" id="gameDescription"></textarea>
+            <label for="gameCategories">Categories:</label>
+            <% categoriesList.forEach((category) => {%>
+            <input
+              type="checkbox"
+              name="<%= category.id %>"
+              id="category<%= category.id %>"
+            />
+            <label for="category<%= category.id %>"><%= category.name %></label>
+            <% }) %>
+
+            <button type="submit">Confirm</button>
+          </form>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
