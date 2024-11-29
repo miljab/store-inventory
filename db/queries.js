@@ -34,10 +34,36 @@ async function getGameWithCategories(game_id) {
   return rows;
 }
 
+async function insertGame(data) {
+  const columns = ["name", "price", "stock"];
+  const values = [data.gameName, data.gamePrice, data.gameStock];
+  if (data.gameDescription) {
+    columns.push("description");
+    values.push(data.gameDescription);
+  }
+  if (data.gameImg) {
+    columns.push("image_url");
+    values.push(data.gameImg);
+  }
+
+  const placeholders = values.map((_, index) => `$${index + 1}`).join(", ");
+
+  const query = `
+  INSERT INTO GAMES (${columns.join(", ")})
+  VALUES (${placeholders})
+  RETURNING *
+  `;
+
+  const { rows } = await pool.query(query, values);
+
+  return rows;
+}
+
 module.exports = {
   getAllCategories,
   getAllGames,
   getGamesWithCategories,
   getGamesInCategory,
   getGameWithCategories,
+  insertGame,
 };

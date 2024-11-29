@@ -71,10 +71,9 @@ const validateGame = [
 
 newGamePost = [
   validateGame,
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors.array());
       return res.status(400).render("newGame", {
         categoriesList: req.categories,
         formData: req.body,
@@ -82,25 +81,9 @@ newGamePost = [
       });
     }
 
-    const {
-      gameName,
-      gamePrice,
-      gameStock,
-      gameImg,
-      gameDescription,
-      gameCategories,
-    } = req.body;
+    const newGame = await db.insertGame(req.body)[0];
 
-    console.log({
-      gameName,
-      gamePrice,
-      gameStock,
-      gameImg,
-      gameDescription,
-      gameCategories,
-    });
-
-    res.redirect("/");
+    res.redirect(`/game/${newGame.id}`);
   },
 ];
 
