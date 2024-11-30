@@ -245,14 +245,21 @@ a {
   cursor: pointer;
 }
 
-.edit-game {
+.controls {
   position: absolute;
-  top: 0px;
+  top: 10px;
   right: 20px;
   font-size: 2rem;
+  display: flex;
+  gap: 15px;
 }
 
-.edit-game:hover {
+.delete-game {
+  color: red;
+}
+
+.edit-game:hover,
+.delete-game:hover {
   cursor: pointer;
 }
 
