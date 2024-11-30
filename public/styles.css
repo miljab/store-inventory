@@ -254,15 +254,6 @@ a {
   gap: 15px;
 }
 
-.delete-game {
-  color: red;
-}
-
-.edit-game:hover,
-.delete-game:hover {
-  cursor: pointer;
-}
-
 .game-card.last {
   display: flex;
   justify-content: center;
@@ -335,4 +326,31 @@ textarea {
 
 .errors-div li {
   margin-left: 25px;
+}
+
+.delete-game-button {
+  background-color: inherit;
+  border: none;
+  width: fit-content;
+  font-size: 2rem;
+  color: red;
+}
+
+.delete-game-form {
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+}
+
+.edit-game-button:hover,
+.delete-game-button:hover {
+  cursor: pointer;
+}
+
+.edit-game-button {
+  background-color: inherit;
+  border: none;
+  width: fit-content;
+  font-size: 2rem;
+  color: white;
 }

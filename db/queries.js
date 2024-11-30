@@ -70,6 +70,10 @@ async function addCategoryToGame(game_id, category_id) {
   );
 }
 
+async function deleteGame(game_id) {
+  await pool.query("DELETE FROM Games WHERE id = $1", [game_id]);
+}
+
 module.exports = {
   getAllCategories,
   getAllGames,
@@ -78,4 +82,5 @@ module.exports = {
   getGameWithCategories,
   insertGame,
   addCategoryToGame,
+  deleteGame,
 };

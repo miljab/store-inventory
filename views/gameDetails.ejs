@@ -15,9 +15,23 @@
       <main>
         <div class="game-info">
           <div class="controls">
-            <span class="edit-game">&middot;&middot;&middot;</span>
-            <form action="/game/delete/<%= game.id %>" method="post">
-              <button type="submit" class="delete-game">&#x2715;</button>
+            <a href="/game/edit/<%= game.id %>"
+              ><button class="edit-game-button">
+                &middot;&middot;&middot;
+              </button></a
+            >
+            <form
+              action="/game/delete/<%= game.id %>"
+              method="post"
+              class="delete-game-form"
+            >
+              <button
+                type="submit"
+                class="delete-game-button"
+                onclick="return confirm('Are you sure you want to delete this game?');"
+              >
+                &#x2715;
+              </button>
             </form>
           </div>
 

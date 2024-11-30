@@ -96,10 +96,18 @@ newGamePost = [
   },
 ];
 
+async function gameDeletePost(req, res) {
+  const id = req.params.id;
+  await db.deleteGame(id);
+
+  res.redirect("/");
+}
+
 module.exports = {
   gamesGet,
   gamesInCategoryGet,
   gameInfoGet,
   newGameGet,
   newGamePost,
+  gameDeletePost,
 };
