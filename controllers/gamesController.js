@@ -103,6 +103,20 @@ async function gameDeletePost(req, res) {
   res.redirect("/");
 }
 
+function editGameGet(req, res) {
+  // todo: trzeba zaladowac strone z values gry w polach formularza
+  // mozna uzyc formData (wtedy bez zmian w view) ale trzeba przekształcić dane z gamesMap tak aby format sie zgadzał
+  // w formData kategorie sa po id a w gamesMap po nazwach
+  // chyba najlatwiej przeksztalcic gameMap tak aby categories wygladaly tak: categories: [{id: 1, name: Action}, {id: 2, name: Sandbox}]
+  // a obecnie wygladaja tak: categories: [Action, Sandbox]
+  // to bedzie wymagac zmiany kodu poprzednich middlewares ale wydaje sie to byc kompleksowe rozwiazanie ktore moze sie tez przydac w przyszlosci
+
+  res.render("editGame", {
+    categoriesList: req.categories,
+    formData: {},
+  });
+}
+
 module.exports = {
   gamesGet,
   gamesInCategoryGet,

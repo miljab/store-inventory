@@ -15,7 +15,9 @@ function createGamesWithCategoriesMap(rows) {
     }
 
     if (row.category_name)
-      gamesMap.get(row.id).categories.push(row.category_name);
+      gamesMap
+        .get(row.id)
+        .categories.push({ id: row.category_id, name: row.category_name });
   });
 
   return gamesMap;
