@@ -27,7 +27,11 @@ async function getGamesInCategory(category_id) {
 
 async function getGameWithCategories(game_id) {
   const { rows } = await pool.query(
-    "SELECT Games.*, Categories.name AS category_name FROM Games LEFT JOIN GameCategories ON Games.id = GameCategories.game_id LEFT JOIN Categories ON GameCategories.category_id = Categories.id WHERE Games.id IN ( SELECT GameCategories.game_id FROM GameCategories WHERE GameCategories.game_id = ($1) )",
+    `SELECT Games.*, Categories.name AS category_name 
+     FROM Games 
+     LEFT JOIN GameCategories ON Games.id = GameCategories.game_id 
+     LEFT JOIN Categories ON GameCategories.category_id = Categories.id 
+     WHERE Games.id = $1`,
     [game_id]
   );
 
@@ -59,6 +63,13 @@ async function insertGame(data) {
   return rows;
 }
 
+async function addCategoryToGame(game_id, category_id) {
+  await pool.query(
+    "INSERT INTO GameCategories (game_id, category_id) VALUES ($1, $2)",
+    [game_id, category_id]
+  );
+}
+
 module.exports = {
   getAllCategories,
   getAllGames,
@@ -66,4 +77,5 @@ module.exports = {
   getGamesInCategory,
   getGameWithCategories,
   insertGame,
+  addCategoryToGame,
 };

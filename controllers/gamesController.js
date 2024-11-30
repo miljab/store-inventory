@@ -81,9 +81,18 @@ newGamePost = [
       });
     }
 
-    const newGame = await db.insertGame(req.body)[0];
+    const newGame = await db.insertGame(req.body);
+    const newGameCategories = req.body.gameCategories;
 
-    res.redirect(`/game/${newGame.id}`);
+    if (newGameCategories && newGameCategories.length > 0) {
+      const categoryPromises = newGameCategories.map((category) =>
+        db.addCategoryToGame(newGame[0].id, category)
+      );
+
+      await Promise.all(categoryPromises);
+    }
+
+    res.redirect(`/game/${newGame[0].id}`);
   },
 ];
 

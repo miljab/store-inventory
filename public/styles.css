@@ -141,7 +141,14 @@ main {
   cursor: pointer;
 }
 
+.game-categories {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
 .game-category {
+  height: 25px;
   background-color: rgb(138, 138, 138);
   padding: 3px 5px;
   border-radius: 8px;
