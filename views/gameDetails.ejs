@@ -16,7 +16,9 @@
         <div class="game-info">
           <div class="controls">
             <span class="edit-game">&middot;&middot;&middot;</span>
-            <span class="delete-game">&#x2715;</span>
+            <form action="/game/delete/<%= game.id %>" method="post">
+              <button type="submit" class="delete-game">&#x2715;</button>
+            </form>
           </div>
 
           <div class="game-info-cover">
