@@ -74,6 +74,43 @@ async function deleteGame(game_id) {
   await pool.query("DELETE FROM Games WHERE id = $1", [game_id]);
 }
 
+async function updateGame(game_id, data) {
+  await pool.query(
+    `UPDATE Games
+    SET name = $1, price = $2, stock = $3, description = $4, image_url = $5
+    WHERE id = $6`,
+    [
+      data.gameName,
+      data.gamePrice,
+      data.gameStock,
+      data.gameDescription,
+      data.gameImg,
+      game_id,
+    ]
+  );
+}
+
+async function updateCategories(game_id, categories) {
+  await pool.query("DELETE FROM GameCategories WHERE game_id = $1", [game_id]);
+
+  const placeholders = categories
+    .map((_, index) => `($${(index + 1) * 2 - 1}, $${(index + 1) * 2})`)
+    .join(", ");
+
+  const values = [];
+
+  for (let i = 0; i < categories.length; i++) {
+    values.push(game_id);
+    values.push(categories[i]);
+  }
+
+  await pool.query(
+    `INSERT INTO GameCategories (game_id, category_id) VALUES
+    ${placeholders}`,
+    values
+  );
+}
+
 module.exports = {
   getAllCategories,
   getAllGames,
@@ -83,4 +120,6 @@ module.exports = {
   insertGame,
   addCategoryToGame,
   deleteGame,
+  updateGame,
+  updateCategories,
 };

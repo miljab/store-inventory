@@ -8,5 +8,7 @@ gamesRouter.get("/game/new", gamesController.newGameGet);
 gamesRouter.post("/game/new", gamesController.newGamePost);
 gamesRouter.get("/game/:id", gamesController.gameInfoGet);
 gamesRouter.post("/game/delete/:id", gamesController.gameDeletePost);
+gamesRouter.get("/game/edit/:id", gamesController.editGameGet);
+gamesRouter.post("/game/edit/:id", gamesController.editGamePost);
 
 module.exports = gamesRouter;

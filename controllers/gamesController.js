@@ -59,7 +59,7 @@ const validateGame = [
     .notEmpty()
     .withMessage("Stock is required.")
     .isInt({ min: "1" })
-    .withMessage("Stock must be greater than 0."),
+    .withMessage("Stock must be integer greater than 0."),
   body("gameImg")
     .optional({ checkFalsy: true })
     .trim()
@@ -103,19 +103,49 @@ async function gameDeletePost(req, res) {
   res.redirect("/");
 }
 
-function editGameGet(req, res) {
-  // todo: trzeba zaladowac strone z values gry w polach formularza
-  // mozna uzyc formData (wtedy bez zmian w view) ale trzeba przekształcić dane z gamesMap tak aby format sie zgadzał
-  // w formData kategorie sa po id a w gamesMap po nazwach
-  // chyba najlatwiej przeksztalcic gameMap tak aby categories wygladaly tak: categories: [{id: 1, name: Action}, {id: 2, name: Sandbox}]
-  // a obecnie wygladaja tak: categories: [Action, Sandbox]
-  // to bedzie wymagac zmiany kodu poprzednich middlewares ale wydaje sie to byc kompleksowe rozwiazanie ktore moze sie tez przydac w przyszlosci
+async function editGameGet(req, res) {
+  const id = req.params.id;
+  const rows = await db.getGameWithCategories(id);
+  const game = gamesMap.createGamesWithCategoriesMap(rows).get(parseInt(id));
+
+  const categoriesID = game.categories.map((category) => category.id);
+
+  const formData = {
+    gameID: game.id,
+    gameName: game.name,
+    gamePrice: game.price,
+    gameStock: game.stock,
+    gameImg: game.image_url,
+    gameDescription: game.description,
+    gameCategories: categoriesID,
+  };
 
   res.render("editGame", {
     categoriesList: req.categories,
-    formData: {},
+    formData: formData,
   });
 }
+
+editGamePost = [
+  validateGame,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("editGame", {
+        categoriesList: req.categories,
+        formData: req.body,
+        errors: errors.array(),
+      });
+    }
+
+    const id = parseInt(req.params.id);
+
+    await db.updateGame(id, req.body);
+    await db.updateCategories(id, req.body.gameCategories);
+
+    res.redirect(`/game/${id}`);
+  },
+];
 
 module.exports = {
   gamesGet,
@@ -124,4 +154,6 @@ module.exports = {
   newGameGet,
   newGamePost,
   gameDeletePost,
+  editGameGet,
+  editGamePost,
 };

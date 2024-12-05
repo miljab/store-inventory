@@ -14,32 +14,30 @@
       <%- include("./partials/sidebar.ejs") %>
       <main>
         <%- include("./partials/errors.ejs") %>
-        <form action="/game/new" method="POST">
+        <form action="/game/edit/<%= formData.gameID %>" method="POST">
           <label for="gameName">Game title:</label>
           <input type="text" name="gameName" id="gameName" value="<%= formData ?
           formData.gameName : ""%>" required/>
           <label for="gamePrice">Price:</label>
-          <input type="text" name="gamePrice" id="gamePrice" required value="<%= formData ?
-          formData.gamePrice : ""%>"/>
+          <input type="text" name="gamePrice" id="gamePrice" required value="<%=
+          formData ? formData.gamePrice : ""%>"/>
           <label for="gameStock">Stock:</label>
-          <input type="text" name="gameStock" id="gameStock" required value="<%= formData ?
-          formData.gameStock : ""%>"/>
+          <input type="text" name="gameStock" id="gameStock" required value="<%=
+          formData ? formData.gameStock : ""%>"/>
           <label for="gameImg">Image URL:</label>
           <input type="text" name="gameImg" id="gameImg" value="<%= formData ?
           formData.gameImg : ""%>"/>
           <label for="gameDescription">Description:</label>
-          <textarea name="gameDescription" id="gameDescription" value="<%= formData ?
-          formData.gameDescription : ""%>"></textarea>
+          <textarea name="gameDescription" id="gameDescription">
+<%= formData ? formData.gameDescription : ""%></textarea
+          >
           <legend>Categories:</legend>
           <% categoriesList.forEach((category) => {%>
           <label for="category<%= category.id %>">
-            <input
-              type="checkbox"
-              name="gameCategories"
-              id="category<%= category.id %>"
-              value="<%= category.id %>"
-              <%= formData && formData.gameCategories && formData.gameCategories.includes(category.id.toString()) ? 'checked' : '' %>
-            />
+            <input type="checkbox" name="gameCategories" id="category<%=
+            category.id %>" value="<%= category.id %>" <%= formData &&
+            formData.gameCategories &&
+            formData.gameCategories.includes(category.id) ? 'checked' : '' %> />
             <%= category.name %></label
           >
           <% }) %>
